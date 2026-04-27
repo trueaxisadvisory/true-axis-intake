@@ -26,47 +26,25 @@ jobs:
           const fs = require('fs');
           const path = require('path');
 
-          // Intake form submissions data
-          // Update this array with your actual intake submissions
+          // Real intake form submissions
           const intakes = [
             {
-              name: "John Smith",
-              email: "john.smith@example.com",
-              phone: "555-0101",
-              organization: "Acme Corp",
-              service_interest: "Strategy Consulting",
-              budget_range: "$50K-$100K",
-              timeline: "Q2 2026",
-              stage: "Qualified",
-              notes: "Initial consultation scheduled",
-              submitted_date: "4/25/2026",
-              contact_status: "In Progress"
-            },
-            {
-              name: "Sarah Johnson",
-              email: "sarah.j@techstartup.io",
-              phone: "555-0102",
-              organization: "TechStartup Inc",
-              service_interest: "Executive Coaching",
-              budget_range: "$20K-$50K",
-              timeline: "Q3 2026",
-              stage: "New Lead",
-              notes: "Awaiting follow-up",
-              submitted_date: "4/24/2026",
-              contact_status: "Pending"
-            },
-            {
-              name: "Michael Chen",
-              email: "m.chen@finance.com",
-              phone: "555-0103",
-              organization: "Finance Solutions",
-              service_interest: "Leadership Development",
-              budget_range: "$100K+",
-              timeline: "Q2 2026",
-              stage: "Qualified",
-              notes: "Ready to move forward",
-              submitted_date: "4/23/2026",
-              contact_status: "In Progress"
+              client_name: "Pending",
+              lead_name: "Erik Sorensen",
+              department: "DCG",
+              organization: "DCG",
+              objective_completion: 100,
+              must_win_task: "Test a",
+              must_win_status: "Yes",
+              alignment_score: 5,
+              clarity_check: "Yes",
+              primary_blocker: "Blocker",
+              monday_request: "Yes",
+              stage: "In Progress",
+              contact_status: "Active",
+              notes: "Initial intake submitted",
+              submitted_date: "4/26/2026",
+              submitted_time: "11:04 PM"
             }
           ];
 
@@ -74,8 +52,9 @@ jobs:
             console.log('Processing intake form submissions...');
             
             const totalIntakes = intakes.length;
-            const qualified = intakes.filter(i => i.stage === 'Qualified').length;
-            const pending = intakes.filter(i => i.contact_status === 'Pending').length;
+            const inProgress = intakes.filter(i => i.stage === 'In Progress').length;
+            const active = intakes.filter(i => i.contact_status === 'Active').length;
+            const withBlockers = intakes.filter(i => i.primary_blocker && i.primary_blocker !== '').length;
 
             const now = new Date();
             const generatedTime = now.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
@@ -83,8 +62,9 @@ jobs:
             const output = {
               generated: generatedTime,
               total_intakes: totalIntakes,
-              qualified_leads: qualified,
-              pending_followup: pending,
+              in_progress: inProgress,
+              active_leads: active,
+              needs_attention: withBlockers,
               intakes: intakes
             };
 
@@ -100,8 +80,9 @@ jobs:
 
             console.log('✓ Updated intakes.json');
             console.log(`  - Total intakes: ${totalIntakes}`);
-            console.log(`  - Qualified leads: ${qualified}`);
-            console.log(`  - Pending follow-up: ${pending}`);
+            console.log(`  - In progress: ${inProgress}`);
+            console.log(`  - Active leads: ${active}`);
+            console.log(`  - Needs attention: ${withBlockers}`);
 
           } catch (error) {
             console.error('Error:', error.message);
