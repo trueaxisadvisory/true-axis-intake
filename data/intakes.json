@@ -1,7 +1,47 @@
 {
-  "generated": "2026-04-27 00:00:00 UTC",
-  "total_intakes": 0,
-  "qualified_leads": 0,
-  "pending_followup": 0,
-  "intakes": []
+  "generated": "2026-04-27 23:33:23 UTC",
+  "total_intakes": 3,
+  "qualified_leads": 2,
+  "pending_followup": 1,
+  "intakes": [
+    {
+      "name": "John Smith",
+      "email": "john.smith@example.com",
+      "phone": "555-0101",
+      "organization": "Acme Corp",
+      "service_interest": "Strategy Consulting",
+      "budget_range": "$50K-$100K",
+      "timeline": "Q2 2026",
+      "stage": "Qualified",
+      "notes": "Initial consultation scheduled",
+      "submitted_date": "4/25/2026",
+      "contact_status": "In Progress"
+    },
+    {
+      "name": "Sarah Johnson",
+      "email": "sarah.j@techstartup.io",
+      "phone": "555-0102",
+      "organization": "TechStartup Inc",
+      "service_interest": "Executive Coaching",
+      "budget_range": "$20K-$50K",
+      "timeline": "Q3 2026",
+      "stage": "New Lead",
+      "notes": "Awaiting follow-up",
+      "submitted_date": "4/24/2026",
+      "contact_status": "Pending"
+    },
+    {
+      "name": "Michael Chen",
+      "email": "m.chen@finance.com",
+      "phone": "555-0103",
+      "organization": "Finance Solutions",
+      "service_interest": "Leadership Development",
+      "budget_range": "$100K+",
+      "timeline": "Q2 2026",
+      "stage": "Qualified",
+      "notes": "Ready to move forward",
+      "submitted_date": "4/23/2026",
+      "contact_status": "In Progress"
+    }
+  ]
 }
