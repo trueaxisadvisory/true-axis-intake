@@ -1,0 +1,117 @@
+name: Sync Intake Form Data
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-intakes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Fetch and process intake form data
+        run: |
+          node << 'NODEEOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Intake form submissions data
+          // Update this array with your actual intake submissions
+          const intakes = [
+            {
+              name: "John Smith",
+              email: "john.smith@example.com",
+              phone: "555-0101",
+              organization: "Acme Corp",
+              service_interest: "Strategy Consulting",
+              budget_range: "$50K-$100K",
+              timeline: "Q2 2026",
+              stage: "Qualified",
+              notes: "Initial consultation scheduled",
+              submitted_date: "4/25/2026",
+              contact_status: "In Progress"
+            },
+            {
+              name: "Sarah Johnson",
+              email: "sarah.j@techstartup.io",
+              phone: "555-0102",
+              organization: "TechStartup Inc",
+              service_interest: "Executive Coaching",
+              budget_range: "$20K-$50K",
+              timeline: "Q3 2026",
+              stage: "New Lead",
+              notes: "Awaiting follow-up",
+              submitted_date: "4/24/2026",
+              contact_status: "Pending"
+            },
+            {
+              name: "Michael Chen",
+              email: "m.chen@finance.com",
+              phone: "555-0103",
+              organization: "Finance Solutions",
+              service_interest: "Leadership Development",
+              budget_range: "$100K+",
+              timeline: "Q2 2026",
+              stage: "Qualified",
+              notes: "Ready to move forward",
+              submitted_date: "4/23/2026",
+              contact_status: "In Progress"
+            }
+          ];
+
+          try {
+            console.log('Processing intake form submissions...');
+            
+            const totalIntakes = intakes.length;
+            const qualified = intakes.filter(i => i.stage === 'Qualified').length;
+            const pending = intakes.filter(i => i.contact_status === 'Pending').length;
+
+            const now = new Date();
+            const generatedTime = now.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+            const output = {
+              generated: generatedTime,
+              total_intakes: totalIntakes,
+              qualified_leads: qualified,
+              pending_followup: pending,
+              intakes: intakes
+            };
+
+            const dataDir = path.join(process.cwd(), 'data');
+            if (!fs.existsSync(dataDir)) {
+              fs.mkdirSync(dataDir, { recursive: true });
+            }
+
+            fs.writeFileSync(
+              path.join(dataDir, 'intakes.json'),
+              JSON.stringify(output, null, 2)
+            );
+
+            console.log('✓ Updated intakes.json');
+            console.log(`  - Total intakes: ${totalIntakes}`);
+            console.log(`  - Qualified leads: ${qualified}`);
+            console.log(`  - Pending follow-up: ${pending}`);
+
+          } catch (error) {
+            console.error('Error:', error.message);
+            process.exit(1);
+          }
+          NODEEOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data/intakes.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update: intake form data sync" && git push)
