@@ -98,33 +98,26 @@
         }
 
         .filter-item label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--navy);
+            font-size: 11px;
+            color: #999;
             margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
-        .filter-item select,
-        .filter-item input {
+        .filter-item input,
+        .filter-item select {
             padding: 10px 12px;
-            border: 1px solid #d4cfc0;
+            border: 1px solid #d0cac0;
             background: white;
             color: var(--ink);
-            font-family: 'Inter', sans-serif;
             font-size: 13px;
-            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
         }
 
-        .filter-item input[type="file"] {
-            padding: 6px 8px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .filter-item select:focus,
-        .filter-item input:focus {
+        .filter-item input:focus,
+        .filter-item select:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 0 2px rgba(184, 147, 74, 0.1);
@@ -132,53 +125,81 @@
 
         .button-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 10px 20px;
-            border: 1px solid var(--gold);
-            background: var(--navy);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
+            padding: 11px 20px;
+            border: 1px solid #d0cac0;
+            background: white;
+            color: var(--ink);
+            border-radius: 0;
             cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
             transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         button:hover {
-            background: var(--gold);
-            color: var(--navy);
+            background: #f9f5ed;
+            border-color: #999;
         }
 
-        button.reset {
-            background: transparent;
-            color: var(--navy);
-        }
-
-        button.reset:hover {
+        button.primary {
             background: var(--navy);
-            color: white;
+            color: var(--cream);
+            border-color: var(--navy);
         }
 
-        button.export-pdf {
+        button.primary:hover {
+            background: var(--gold-deep);
+            border-color: var(--gold-deep);
+        }
+
+        button.refresh {
             background: var(--gold);
-            color: var(--navy);
+            color: white;
             border-color: var(--gold);
         }
 
-        button.export-pdf:hover {
+        button.refresh:hover {
             background: var(--gold-deep);
             border-color: var(--gold-deep);
-            color: white;
         }
 
-        .stats-row {
+        .data-load-status {
+            padding: 15px;
+            border-radius: 0;
+            margin-bottom: 20px;
+            font-size: 13px;
+            border-left: 3px solid;
+        }
+
+        .status-loading {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-left-color: #1565c0;
+        }
+
+        .status-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left-color: #2e7d32;
+        }
+
+        .status-error {
+            background: #ffebee;
+            color: #c62828;
+            border-left-color: #c62828;
+        }
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 16px;
             margin-bottom: 30px;
         }
@@ -188,288 +209,95 @@
             border: 1px solid #e5e0d4;
             padding: 18px;
             text-align: center;
+            border-radius: 0;
         }
 
         .stat-label {
             font-size: 11px;
-            font-weight: 600;
-            color: #666;
+            color: #999;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
             margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .stat-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
             color: var(--navy);
         }
 
-        .submissions-section {
+        .table-container {
             background: white;
             border: 1px solid #e5e0d4;
-            padding: 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-radius: 0;
+            overflow-x: auto;
         }
 
-        .submissions-header {
-            background: var(--navy);
-            color: white;
-            padding: 18px 24px;
-            border-bottom: 1px solid var(--gold-deep);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
         }
 
-        .submissions-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .submissions-list {
-            max-height: 800px;
-            overflow-y: auto;
-        }
-
-        .submission-item {
+        thead {
+            background: #f9f5ed;
             border-bottom: 1px solid #e5e0d4;
-            padding: 20px 24px;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: white;
         }
 
-        .submission-item:hover {
-            background: #fdfbf7;
-        }
-
-        .submission-item.expanded {
-            background: #f9f6f0;
-        }
-
-        .submission-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-
-        .submission-lead {
-            flex: 1;
-        }
-
-        .submission-lead-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
+        th {
+            padding: 14px;
+            text-align: left;
             font-weight: 600;
             color: var(--navy);
-            margin-bottom: 2px;
-        }
-
-        .submission-meta {
+            letter-spacing: 0.3px;
             font-size: 12px;
-            color: #666;
-            gap: 12px;
-            display: flex;
-        }
-
-        .submission-metrics {
-            display: flex;
-            gap: 16px;
-            font-size: 12px;
-        }
-
-        .metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .metric-label {
-            font-weight: 600;
-            color: #666;
             text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 0.2px;
-            margin-bottom: 2px;
         }
 
-        .metric-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--navy);
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f0ebe0;
         }
 
-        .completion-bar {
-            width: 80px;
-            height: 4px;
-            background: #e5e0d4;
-            margin-top: 4px;
+        tbody tr:hover {
+            background: #faf8f3;
         }
 
-        .completion-fill {
-            height: 100%;
-            background: var(--gold);
+        .loading-spinner {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .status-badge {
-            padding: 4px 10px;
-            border-radius: 2px;
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 0;
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.2px;
+            letter-spacing: 0.3px;
         }
 
-        .status-yes {
+        .badge-active {
             background: #d4edda;
             color: #155724;
         }
 
-        .status-no {
+        .badge-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-blocked {
             background: #f8d7da;
             color: #721c24;
-        }
-
-        .submission-details {
-            display: none;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid #e5e0d4;
-        }
-
-        .submission-item.expanded .submission-details {
-            display: block;
-        }
-
-        .detail-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 16px;
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.2px;
-            margin-bottom: 4px;
-        }
-
-        .detail-value {
-            font-size: 13px;
-            color: var(--ink);
-            line-height: 1.5;
-        }
-
-        .assessment-section {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid #e5e0d4;
-            background: #fafaf8;
-            padding: 14px;
-            margin-left: -14px;
-            margin-right: -14px;
-            padding-left: 14px;
-            padding-right: 14px;
-        }
-
-        .assessment-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--navy);
-            text-transform: uppercase;
-            letter-spacing: 0.2px;
-            margin-bottom: 12px;
-        }
-
-        .ryg-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .ryg-option {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ryg-option input[type="radio"] {
-            cursor: pointer;
-            accent-color: var(--gold);
-        }
-
-        .ryg-option label {
-            cursor: pointer;
-            font-size: 12px;
-            margin: 0;
-            font-weight: 500;
-        }
-
-        .assessment-textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d4cfc0;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            resize: vertical;
-            min-height: 80px;
-            margin-bottom: 10px;
-        }
-
-        .assessment-textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 2px rgba(184, 147, 74, 0.1);
-        }
-
-        .save-assessment {
-            padding: 8px 16px;
-            font-size: 11px;
-            background: var(--gold);
-            color: var(--navy);
-            border-color: var(--gold);
-            font-weight: 600;
-        }
-
-        .save-assessment:hover {
-            background: var(--gold-deep);
-            border-color: var(--gold-deep);
-            color: white;
-        }
-
-        .no-data {
-            padding: 40px;
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-        }
-
-        @media print {
-            body {
-                background: white;
-            }
-            .controls-section,
-            .button-group,
-            .assessment-section {
-                display: none;
-            }
-        }
-
-        .hidden {
-            display: none !important;
         }
     </style>
 </head>
@@ -477,538 +305,138 @@
     <div class="container">
         <div class="header">
             <svg class="compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer gray circle -->
-                <circle cx="50" cy="50" r="48" fill="none" stroke="#7a8fa3" stroke-width="2.5"/>
-                <!-- Inner gray circle -->
-                <circle cx="50" cy="50" r="42" fill="none" stroke="#7a8fa3" stroke-width="1.8"/>
-                <!-- Gold compass points forming a four-pointed star -->
-                <!-- North point -->
-                <path d="M 50 12 L 53 35 L 50 40 L 47 35 Z" fill="#b8934a"/>
-                <!-- South point -->
-                <path d="M 50 88 L 53 65 L 50 60 L 47 65 Z" fill="#b8934a"/>
-                <!-- East point -->
-                <path d="M 88 50 L 65 53 L 60 50 L 65 47 Z" fill="#b8934a"/>
-                <!-- West point -->
-                <path d="M 12 50 L 35 53 L 40 50 L 35 47 Z" fill="#b8934a"/>
-                <!-- Center circle -->
-                <circle cx="50" cy="50" r="3" fill="#b8934a"/>
+                <circle cx="50" cy="50" r="48" fill="none" stroke="#b8934a" stroke-width="0.7" opacity="0.7"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#b8934a" stroke-width="0.5" opacity="0.4"/>
+                <line x1="50" y1="10" x2="50" y2="25" stroke="#b8934a" stroke-width="1.6"/>
+                <line x1="50" y1="75" x2="50" y2="90" stroke="#b8934a" stroke-width="1.6"/>
+                <line x1="10" y1="50" x2="25" y2="50" stroke="#8a6d28" stroke-width="1.6"/>
+                <line x1="75" y1="50" x2="90" y2="50" stroke="#8a6d28" stroke-width="1.6"/>
+                <circle cx="50" cy="50" r="1.6" fill="#b8934a"/>
             </svg>
             <div class="header-text">
-                <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">True Axis Advisory</div>
                 <h1>Intake Dashboard</h1>
-                <p>Weekly Organizational Alignment Review</p>
+                <p>Weekly intake tracking and lead qualification</p>
             </div>
+        </div>
+
+        <div class="data-load-status status-loading" id="loadStatus">
+            <span class="loading-spinner">⟳</span> Loading intake data...
         </div>
 
         <div class="controls-section">
-            <div class="controls-title">Filters & Controls</div>
-            <div class="filter-grid">
-                <div class="filter-item">
-                    <label for="orgFilter">Organization</label>
-                    <select id="orgFilter">
-                        <option value="">All Organizations</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label for="deptFilter">Department</label>
-                    <select id="deptFilter">
-                        <option value="">All Departments</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label for="startDate">Start Date</label>
-                    <input type="date" id="startDate">
-                </div>
-                <div class="filter-item">
-                    <label for="endDate">End Date</label>
-                    <input type="date" id="endDate">
-                </div>
-            </div>
+            <div class="controls-title">Controls</div>
             <div class="button-group">
-                <button onclick="applyFilters()">Apply Filters</button>
-                <button class="reset" onclick="resetFilters()">Reset All</button>
-                <button class="export-pdf" onclick="exportPDF()">Export PDF</button>
+                <button class="refresh" onclick="refreshData()">🔄 Refresh Data</button>
             </div>
         </div>
 
-        <div class="stats-row">
+        <div class="stats-grid" id="statsGrid" style="display: none;">
             <div class="stat-card">
-                <div class="stat-label">Submissions (Filtered)</div>
-                <div class="stat-value" id="submissionCount">0</div>
+                <div class="stat-label">Total Intakes</div>
+                <div class="stat-value" id="totalIntakes">0</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Organizations</div>
-                <div class="stat-value" id="orgCount">0</div>
+                <div class="stat-label">In Progress</div>
+                <div class="stat-value" id="inProgress">0</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Departments</div>
-                <div class="stat-value" id="deptCount">0</div>
+                <div class="stat-label">Active Leads</div>
+                <div class="stat-value" id="activeLeads">0</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Avg Alignment</div>
-                <div class="stat-value" id="avgAlignment">0/5</div>
+                <div class="stat-label">Needs Attention</div>
+                <div class="stat-value" id="needsAttention">0</div>
             </div>
         </div>
 
-        <div class="submissions-section">
-            <div class="submissions-header">
-                <h2>Weekly Submissions</h2>
-            </div>
-            <div class="submissions-list" id="submissionsList"></div>
+        <div class="table-container" id="tableContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lead Name</th>
+                        <th>Organization</th>
+                        <th>Service Interest</th>
+                        <th>Status</th>
+                        <th>Alignment Score</th>
+                        <th>Primary Blocker</th>
+                        <th>Submitted</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
         </div>
     </div>
 
     <script>
-        // INTAKE FORM DATA (auto-loaded from intakes.json)
-            "generated": new Date().toISOString(),
-            "total_submissions": 0,
-            "submissions": []
-        };
+        let allData = null;
 
-        let filteredData = null;
-        let allIntakes = [];
-
-        // Parse date from Formspree format
-        function parseFormspreeDate(dateStr) {
-            const date = new Date(dateStr);
-            return date;
-        }
-
-        function formatDate(date) {
-            return date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
-        }
-
-        function initializeData() {
-            if (!allData.submissions || allData.submissions.length === 0) {
-                document.getElementById('submissionsList').innerHTML = '<div class="no-data">No intake submissions loaded. Click "Load Data File" to select your intakes.json file.</div>';
-                return;
-            }
-
-            allIntakes = JSON.parse(JSON.stringify(allData.submissions));
-            filteredData = JSON.parse(JSON.stringify(allIntakes));
-            initializeFilters();
-            updateDisplay();
-        }
-
-        function initializeFilters() {
-            const orgs = new Set();
-            const depts = new Set();
-
-            allIntakes.forEach(s => {
-                if (s.client_name && s.client_name.trim()) orgs.add(s.client_name);
-                if (s.department && s.department.trim()) depts.add(s.department);
-            });
-
-            const orgSelect = document.getElementById('orgFilter');
-            const deptSelect = document.getElementById('deptFilter');
-
-            // Clear existing options (except first)
-            orgSelect.innerHTML = '<option value="">All Organizations</option>';
-            deptSelect.innerHTML = '<option value="">All Departments</option>';
-
-            orgs.forEach(org => {
-                const option = document.createElement('option');
-                option.value = org;
-                option.textContent = org;
-                orgSelect.appendChild(option);
-            });
-
-            depts.forEach(dept => {
-                const option = document.createElement('option');
-                option.value = dept;
-                option.textContent = dept;
-                deptSelect.appendChild(option);
-            });
-
-            if (allIntakes.length > 0) {
-                const dates = allIntakes.map(s => parseFormspreeDate(s.timestamp)).sort();
-                const minDate = dates[0].toISOString().split('T')[0];
-                const maxDate = dates[dates.length - 1].toISOString().split('T')[0];
-                document.getElementById('endDate').value = maxDate;
+        async function loadData() {
+            try {
+                document.getElementById('loadStatus').innerHTML = '<span class="loading-spinner">⟳</span> Loading intake data...';
+                document.getElementById('loadStatus').className = 'data-load-status status-loading';
+                
+                const response = await fetch('./data/intakes.json?cachebust=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load data');
+                
+                allData = await response.json();
+                
+                document.getElementById('loadStatus').innerHTML = '✓ Data loaded successfully at ' + new Date().toLocaleTimeString();
+                document.getElementById('loadStatus').className = 'data-load-status status-success';
+                
+                updateDisplay();
+            } catch (error) {
+                document.getElementById('loadStatus').innerHTML = '✗ Error loading data: ' + error.message + '. Ensure intakes.json exists in the data folder.';
+                document.getElementById('loadStatus').className = 'data-load-status status-error';
+                console.error('Data load error:', error);
             }
         }
 
-        function applyFilters() {
-            const org = document.getElementById('orgFilter').value;
-            const dept = document.getElementById('deptFilter').value;
-            const startDateStr = document.getElementById('startDate').value;
-            const endDateStr = document.getElementById('endDate').value;
-
-            let startDate = null;
-            let endDate = null;
-
-            if (startDateStr) {
-                startDate = new Date(startDateStr);
-                startDate.setHours(0, 0, 0, 0);
-            }
-            if (endDateStr) {
-                endDate = new Date(endDateStr);
-                endDate.setHours(23, 59, 59, 999);
-            }
-
-            filteredData = allIntakes.filter(s => {
-                const matchOrg = !org || s.client_name === org;
-                const matchDept = !dept || s.department === dept;
-                const date = parseFormspreeDate(s.timestamp);
-                const matchDate = (!startDate || date >= startDate) && (!endDate || date <= endDate);
-
-                return matchOrg && matchDept && matchDate;
-            });
-
-            updateDisplay();
-        }
-
-        function resetFilters() {
-            document.getElementById('orgFilter').value = '';
-            document.getElementById('deptFilter').value = '';
-            document.getElementById('startDate').value = '';
-            if (allIntakes.length > 0) {
-                const dates = allIntakes.map(s => parseFormspreeDate(s.timestamp)).sort();
-                const maxDate = dates[dates.length - 1].toISOString().split('T')[0];
-                document.getElementById('endDate').value = maxDate;
-            }
-            filteredData = JSON.parse(JSON.stringify(allIntakes));
-            updateDisplay();
+        function refreshData() {
+            location.reload();
         }
 
         function updateDisplay() {
-            updateStats();
-            renderSubmissions();
+            if (!allData) return;
+            
+            document.getElementById('statsGrid').style.display = 'grid';
+            document.getElementById('tableContainer').style.display = 'block';
+
+            document.getElementById('totalIntakes').textContent = allData.total_intakes || 0;
+            document.getElementById('inProgress').textContent = allData.in_progress || 0;
+            document.getElementById('activeLeads').textContent = allData.active_leads || 0;
+            document.getElementById('needsAttention').textContent = allData.needs_attention || 0;
+
+            updateTable();
         }
 
-        function updateStats() {
-            document.getElementById('submissionCount').textContent = filteredData.length;
+        function updateTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
 
-            const orgs = new Set(filteredData.map(s => s.client_name).filter(Boolean));
-            document.getElementById('orgCount').textContent = orgs.size;
-
-            const depts = new Set(filteredData.map(s => s.department).filter(Boolean));
-            document.getElementById('deptCount').textContent = depts.size;
-
-            const alignments = filteredData.map(s => parseInt(s.alignment_score) || 0).filter(a => a > 0);
-            const avgAlign = alignments.length > 0 ? (alignments.reduce((a, b) => a + b) / alignments.length).toFixed(1) : '0';
-            document.getElementById('avgAlignment').textContent = avgAlign + '/5';
-        }
-
-        function renderSubmissions() {
-            const container = document.getElementById('submissionsList');
-            container.innerHTML = '';
-
-            if (filteredData.length === 0) {
-                container.innerHTML = '<div class="no-data">No submissions match the selected filters.</div>';
+            if (!allData.intakes || allData.intakes.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: #999;">No intake data available</td></tr>';
                 return;
             }
 
-            filteredData.forEach((submission, idx) => {
-                const date = parseFormspreeDate(submission.timestamp);
-                const formattedDate = formatDate(date);
-                const rygStatus = submission.ryg_assessment || '';
-                const rygClass = rygStatus ? 'status-' + rygStatus.toLowerCase() : '';
-
-                const item = document.createElement('div');
-                item.className = 'submission-item';
-                item.id = 'submission-' + idx;
-
-                item.innerHTML = `
-                    <div class="submission-header">
-                        <div class="submission-lead">
-                            <div class="submission-lead-name">${submission.lead_name || '[No Name]'}</div>
-                            <div class="submission-meta">
-                                <span>${submission.client_name || '[No Org]'}</span>
-                                <span>${submission.department || '[No Dept]'}</span>
-                                <span>${formattedDate}</span>
-                            </div>
-                        </div>
-                        <div class="submission-metrics">
-                            <div class="metric">
-                                <div class="metric-label">Completion</div>
-                                <div class="metric-value">${submission.objective_completion || 0}%</div>
-                                <div class="completion-bar">
-                                    <div class="completion-fill" style="width: ${submission.objective_completion || 0}%"></div>
-                                </div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-label">Alignment</div>
-                                <div class="metric-value">${submission.alignment_score || 0}/5</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-label">Clarity</div>
-                                <div class="metric-value">${submission.clarity_check === 'Yes' ? '✓' : '✗'}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="submission-details">
-                        <div class="detail-row">
-                            <div class="detail-item">
-                                <div class="detail-label">Must-Win Task</div>
-                                <div class="detail-value">${submission.must_win_task || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Must-Win Status</div>
-                                <div class="detail-value"><span class="status-badge ${submission.must_win_status === 'Yes' ? 'status-yes' : 'status-no'}">${submission.must_win_status || 'N/A'}</span></div>
-                            </div>
-                        </div>
-                        <div class="detail-row">
-                            <div class="detail-item">
-                                <div class="detail-label">Primary Blocker</div>
-                                <div class="detail-value">${submission.primary_blocker || 'None identified'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Monday Request</div>
-                                <div class="detail-value">${submission.monday_request || 'None'}</div>
-                            </div>
-                        </div>
-
-                        <div class="assessment-section">
-                            <div class="assessment-title">Red / Yellow / Green Assessment</div>
-                            <div class="ryg-grid">
-                                <div class="ryg-option">
-                                    <input type="radio" id="ryg-r-${idx}" name="ryg-${idx}" value="Red" ${submission.ryg_assessment === 'Red' ? 'checked' : ''}>
-                                    <label for="ryg-r-${idx}">Red</label>
-                                </div>
-                                <div class="ryg-option">
-                                    <input type="radio" id="ryg-y-${idx}" name="ryg-${idx}" value="Yellow" ${submission.ryg_assessment === 'Yellow' ? 'checked' : ''}>
-                                    <label for="ryg-y-${idx}">Yellow</label>
-                                </div>
-                                <div class="ryg-option">
-                                    <input type="radio" id="ryg-g-${idx}" name="ryg-${idx}" value="Green" ${submission.ryg_assessment === 'Green' ? 'checked' : ''}>
-                                    <label for="ryg-g-${idx}">Green</label>
-                                </div>
-                            </div>
-                            <textarea class="assessment-textarea" id="narrative-${idx}" placeholder="Assessment narrative (optional)">${submission.ryg_narrative || ''}</textarea>
-                            <button class="save-assessment" onclick="saveAssessment(${idx})">Save Assessment</button>
-                        </div>
-                    </div>
+            allData.intakes.forEach(intake => {
+                const row = tbody.insertRow();
+                
+                const statusBadge = intake.contact_status === 'Active' ? 'badge-active' : 
+                                   intake.contact_status === 'Pending' ? 'badge-pending' : 'badge-blocked';
+                
+                row.innerHTML = `
+                    <td><strong>${intake.lead_name || 'N/A'}</strong></td>
+                    <td>${intake.organization || intake.department || 'N/A'}</td>
+                    <td>${intake.must_win_task || 'N/A'}</td>
+                    <td><span class="status-badge ${statusBadge}">${intake.contact_status || 'N/A'}</span></td>
+                    <td>${intake.alignment_score !== undefined ? intake.alignment_score + '/10' : 'N/A'}</td>
+                    <td>${intake.primary_blocker || 'None'}</td>
+                    <td>${intake.submitted_date || 'N/A'}</td>
                 `;
-
-                item.addEventListener('click', function(e) {
-                    if (e.target.closest('.assessment-section') || e.target.closest('button')) return;
-                    this.classList.toggle('expanded');
-                });
-
-                container.appendChild(item);
             });
         }
 
-        function saveAssessment(idx) {
-            const ryg = document.querySelector(`input[name="ryg-${idx}"]:checked`)?.value || '';
-            const narrative = document.getElementById(`narrative-${idx}`).value;
-
-            filteredData[idx].ryg_assessment = ryg;
-            filteredData[idx].ryg_narrative = narrative;
-
-            // Also update in allIntakes
-            const originalIdx = allIntakes.findIndex(s => s === filteredData[idx]);
-            if (originalIdx >= 0) {
-                allIntakes[originalIdx].ryg_assessment = ryg;
-                allIntakes[originalIdx].ryg_narrative = narrative;
-            }
-
-            alert('Assessment saved for ' + filteredData[idx].lead_name);
-        }
-
-        function exportPDF() {
-            if (filteredData.length === 0) {
-                alert('No submissions to export.');
-                return;
-            }
-
-            const element = document.createElement('div');
-            element.style.padding = '40px';
-            element.style.fontFamily = 'Inter, sans-serif';
-            element.style.background = 'white';
-            element.style.color = '#111113';
-
-            // Group by organization and department
-            const byOrg = {};
-            filteredData.forEach(s => {
-                const org = s.client_name || 'Unknown';
-                const dept = s.department || 'Unassigned';
-                if (!byOrg[org]) byOrg[org] = {};
-                if (!byOrg[org][dept]) byOrg[org][dept] = [];
-                byOrg[org][dept].push(s);
-            });
-
-            // Cover page
-            let html = `
-                <div style="page-break-after: always; text-align: center; padding: 60px 40px; border-bottom: 2px solid #b8934a;">
-                    <div style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; color: #0a1529; margin-bottom: 10px; letter-spacing: -0.5px;">
-                        Executive Scorecard
-                    </div>
-                    <div style="font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 40px;">Weekly Organizational Alignment Review</div>
-                    <div style="font-size: 16px; color: #111113; margin-bottom: 20px;">
-                        <strong>Period:</strong> ${getDateRange()}
-                    </div>
-                    <div style="font-size: 14px; color: #666; margin-bottom: 30px;">
-                        <strong>Organizations:</strong> ${Object.keys(byOrg).length}
-                    </div>
-                    <div style="font-size: 13px; color: #999; margin-top: 60px;">True Axis Advisory</div>
-                    <div style="font-size: 12px; color: #999;">Clarity. Alignment. Execution. When It Matters Most.</div>
-                </div>
-            `;
-
-            // Summary metrics
-            html += `
-                <div style="page-break-after: always; padding: 40px;">
-                    <div style="font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: #0a1529; margin-bottom: 30px;">Summary Metrics</div>
-                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
-                        <tr style="border-bottom: 2px solid #b8934a;">
-                            <td style="padding: 12px; font-weight: 600; color: #0a1529;">Total Submissions</td>
-                            <td style="padding: 12px; text-align: right; font-size: 20px; font-weight: 600; color: #0a1529;">${filteredData.length}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e5e0d4;">
-                            <td style="padding: 12px; color: #111113;">Organizations</td>
-                            <td style="padding: 12px; text-align: right; color: #111113;">${Object.keys(byOrg).length}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e5e0d4;">
-                            <td style="padding: 12px; color: #111113;">Avg Completion %</td>
-                            <td style="padding: 12px; text-align: right; color: #111113;">${getAvgCompletion(filteredData)}%</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e5e0d4;">
-                            <td style="padding: 12px; color: #111113;">Avg Alignment Score</td>
-                            <td style="padding: 12px; text-align: right; color: #111113;">${getAvgAlignment(filteredData)}/5</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e5e0d4;">
-                            <td style="padding: 12px; color: #111113;">Clarity Check Pass Rate</td>
-                            <td style="padding: 12px; text-align: right; color: #111113;">${getClarityRate(filteredData)}%</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e5e0d4;">
-                            <td style="padding: 12px; color: #111113;">Must-Win Status</td>
-                            <td style="padding: 12px; text-align: right; color: #111113;">${getMustWinRate(filteredData)}% On Track</td>
-                        </tr>
-                    </table>
-                </div>
-            `;
-
-            // Department breakdowns
-            Object.keys(byOrg).forEach(org => {
-                html += `
-                    <div style="page-break-after: always; padding: 40px;">
-                        <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: #0a1529; margin-bottom: 8px;">${org}</div>
-                        <div style="font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 30px;">Detailed Submission Breakdown</div>
-                `;
-
-                Object.keys(byOrg[org]).forEach(dept => {
-                    const submissions = byOrg[org][dept];
-                    html += `
-                        <div style="margin-bottom: 30px;">
-                            <div style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #0a1529; padding: 10px 12px; background: #f9f6f0; border-left: 3px solid #b8934a; margin-bottom: 12px;">
-                                ${dept}
-                            </div>
-                    `;
-
-                    submissions.forEach(s => {
-                        const rygColor = s.ryg_assessment === 'Red' ? '#c0392b' : (s.ryg_assessment === 'Yellow' ? '#e67e22' : '#27ae60');
-                        const rygBg = s.ryg_assessment === 'Red' ? '#f8d7da' : (s.ryg_assessment === 'Yellow' ? '#fff3cd' : '#d4edda');
-                        html += `
-                            <div style="border: 1px solid #e5e0d4; padding: 16px; margin-bottom: 12px;">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                    <div>
-                                        <div style="font-weight: 600; color: #0a1529; margin-bottom: 4px;">${s.lead_name || 'N/A'}</div>
-                                        <div style="font-size: 12px; color: #666;">${formatDate(parseFormspreeDate(s.timestamp))}</div>
-                                    </div>
-                                    ${s.ryg_assessment ? `<div style="padding: 4px 12px; background: ${rygBg}; color: ${rygColor}; font-weight: 600; font-size: 12px; border-radius: 2px;">${s.ryg_assessment}</div>` : ''}
-                                </div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; font-size: 12px; margin-bottom: 12px;">
-                                    <div>
-                                        <div style="font-weight: 600; color: #666; font-size: 11px; text-transform: uppercase; margin-bottom: 4px;">Completion</div>
-                                        <div style="font-size: 18px; font-weight: 600; color: #0a1529;">${s.objective_completion || 0}%</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-weight: 600; color: #666; font-size: 11px; text-transform: uppercase; margin-bottom: 4px;">Alignment</div>
-                                        <div style="font-size: 18px; font-weight: 600; color: #0a1529;">${s.alignment_score || 0}/5</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-weight: 600; color: #666; font-size: 11px; text-transform: uppercase; margin-bottom: 4px;">Clarity</div>
-                                        <div style="font-size: 18px; font-weight: 600; color: #0a1529;">${s.clarity_check === 'Yes' ? '✓' : '✗'}</div>
-                                    </div>
-                                </div>
-                                <div style="margin-bottom: 12px;">
-                                    <div style="font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; margin-bottom: 4px;">Must-Win Task</div>
-                                    <div style="font-size: 12px; color: #111113;">${s.must_win_task || 'N/A'} (${s.must_win_status === 'Yes' ? 'On Track' : 'Off Track'})</div>
-                                </div>
-                                <div style="margin-bottom: 12px;">
-                                    <div style="font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; margin-bottom: 4px;">Primary Blocker</div>
-                                    <div style="font-size: 12px; color: #111113;">${s.primary_blocker || 'None'}</div>
-                                </div>
-                                ${s.ryg_narrative ? `
-                                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e0d4;">
-                                        <div style="font-size: 11px; font-weight: 600; color: #666; text-transform: uppercase; margin-bottom: 4px;">Assessment Notes</div>
-                                        <div style="font-size: 12px; color: #111113; line-height: 1.5;">${s.ryg_narrative}</div>
-                                    </div>
-                                ` : ''}
-                            </div>
-                        `;
-                    });
-
-                    html += '</div>';
-                });
-
-                html += '</div>';
-            });
-
-            element.innerHTML = html;
-
-            const opt = {
-                margin: 10,
-                filename: 'True-Axis-Intake-Scorecard-' + new Date().toISOString().split('T')[0] + '.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-            };
-
-            html2pdf().set(opt).from(element).save();
-        }
-
-        function getDateRange() {
-            if (filteredData.length === 0) return 'N/A';
-            const dates = filteredData.map(s => parseFormspreeDate(s.timestamp)).sort();
-            return formatDate(dates[0]) + ' to ' + formatDate(dates[dates.length - 1]);
-        }
-
-        function getAvgCompletion(data) {
-            const completions = data.map(s => parseInt(s.objective_completion) || 0).filter(c => c > 0);
-            return completions.length > 0 ? Math.round(completions.reduce((a, b) => a + b) / completions.length) : 0;
-        }
-
-        function getAvgAlignment(data) {
-            const alignments = data.map(s => parseInt(s.alignment_score) || 0).filter(a => a > 0);
-            return alignments.length > 0 ? (alignments.reduce((a, b) => a + b) / alignments.length).toFixed(1) : 0;
-        }
-
-        function getClarityRate(data) {
-            const yes = data.filter(s => s.clarity_check === 'Yes').length;
-            return data.length > 0 ? Math.round((yes / data.length) * 100) : 0;
-        }
-
-        function getMustWinRate(data) {
-            const yes = data.filter(s => s.must_win_status === 'Yes').length;
-            return data.length > 0 ? Math.round((yes / data.length) * 100) : 0;
-        }
-
-        // Auto-load intakes.json on page load
-        function autoLoadJSON() {
-            // Try to load intakes.json from the same directory
-            fetch('intakes.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Could not load intakes.json');
-                    return response.json();
-                })
-                .then(data => {
-                    Object.assign(allData, data);
-                    allIntakes = [];
-                    filteredData = null;
-                    initializeData();
-                    console.log('Intakes loaded: ' + allData.total_submissions + ' submissions');
-                })
-                .catch(error => {
-                    console.log('Auto-load failed, using file picker instead');
-                    initializeData();
-                });
-        }
-
-        window.addEventListener('load', autoLoadJSON);
+        window.addEventListener('load', loadData);
     </script>
 </body>
 </html>
