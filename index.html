@@ -831,16 +831,16 @@
                     'data/intakes.json'
                 ];
                 
-                let data = null;
+                let jsonData = null;
                 let lastError = null;
                 
                 for (const path of paths) {
                     try {
                         const response = await fetch(path + '?t=' + Date.now());
                         if (response.ok) {
-                            data = await response.json();
+                            jsonData = await response.json();
                             console.log('Successfully loaded from:', path);
-                            console.log('Data:', data);
+                            console.log('Raw data:', jsonData);
                             break;
                         }
                     } catch (error) {
@@ -849,13 +849,20 @@
                     }
                 }
                 
-                if (data && data.intakes) {
-                    allData = data;
-                    filteredData = JSON.parse(JSON.stringify(allData));
-                    renderDashboard();
-                    console.log('Dashboard loaded with', data.intakes.length, 'intakes');
+                if (jsonData && jsonData.intakes && Array.isArray(jsonData.intakes)) {
+                    // Map the GitHub workflow data to the dashboard's expected format
+                    allData = {
+                        total_submissions: jsonData.total_intakes || jsonData.intakes.length,
+                        total_intakes: jsonData.total_intakes || jsonData.intakes.length,
+                        submissions: jsonData.intakes,
+                        intakes: jsonData.intakes
+                    };
+                    filteredData = null;
+                    initializeData();
+                    console.log('Dashboard loaded with', jsonData.intakes.length, 'intakes');
                 } else {
                     console.error('No data loaded. Last error:', lastError);
+                    console.error('Data structure was:', jsonData);
                 }
             } catch (error) {
                 console.error('Error in loadData:', error);
