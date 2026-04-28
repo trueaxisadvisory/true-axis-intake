@@ -824,16 +824,41 @@
 
         async function loadData() {
             try {
-                const response = await fetch('./data/intakes.json?t=' + Date.now());
-                if (!response.ok) throw new Error('Failed to load data');
-                const jsonData = await response.json();
-                if (jsonData.intakes) {
-                    allData = jsonData.intakes;
+                // Try multiple possible paths
+                const paths = [
+                    './data/intakes.json',
+                    '/true-axis-intake/data/intakes.json',
+                    'data/intakes.json'
+                ];
+                
+                let data = null;
+                let lastError = null;
+                
+                for (const path of paths) {
+                    try {
+                        const response = await fetch(path + '?t=' + Date.now());
+                        if (response.ok) {
+                            data = await response.json();
+                            console.log('Successfully loaded from:', path);
+                            console.log('Data:', data);
+                            break;
+                        }
+                    } catch (error) {
+                        lastError = error;
+                        console.log('Failed to load from:', path, error);
+                    }
+                }
+                
+                if (data && data.intakes) {
+                    allData = data;
                     filteredData = JSON.parse(JSON.stringify(allData));
                     renderDashboard();
+                    console.log('Dashboard loaded with', data.intakes.length, 'intakes');
+                } else {
+                    console.error('No data loaded. Last error:', lastError);
                 }
             } catch (error) {
-                console.error('Error loading data:', error);
+                console.error('Error in loadData:', error);
             }
         }
 
