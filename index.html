@@ -593,12 +593,15 @@
         }
 
         function initializeData() {
-            if (!allData.submissions || allData.submissions.length === 0) {
-                document.getElementById('submissionsList').innerHTML = '<div class="no-data">No intake submissions loaded. Embed JSON data in the allData object.</div>';
+            // Handle both old format (submissions) and new format (intakes)
+            const data = allData.submissions || allData.intakes || [];
+            
+            if (!data || data.length === 0) {
+                document.getElementById('submissionsList').innerHTML = '<div class="no-data">No intake submissions loaded.</div>';
                 return;
             }
 
-            allIntakes = JSON.parse(JSON.stringify(allData.submissions));
+            allIntakes = JSON.parse(JSON.stringify(data));
             filteredData = JSON.parse(JSON.stringify(allIntakes));
             initializeFilters();
             updateDisplay();
