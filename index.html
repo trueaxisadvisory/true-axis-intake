@@ -514,6 +514,7 @@
         <div class="controls-section">
             <div class="controls-title">Filters & Controls</div>
             <div class="filter-grid">
+
                 <div class="filter-item">
                     <label for="orgFilter">Organization</label>
                     <select id="orgFilter">
@@ -575,13 +576,32 @@
         const allData = {
             "generated": new Date().toISOString(),
             "total_submissions": 0,
-            "submissions": []
+            "respondents": []
         };
 
         let filteredData = null;
         let allIntakes = [];
 
         // Load JSON file from user's file system
+        async function loadData() {
+            try {
+                const response = await fetch('./data/intakes.json?cachebust=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load data');
+                
+                allData = await response.json();
+                filteredData = JSON.parse(JSON.stringify(allData));
+                
+                initializeFilters();
+                updateDisplay();
+            } catch (error) {
+                console.error('Data load error:', error);
+            }
+        }
+
+        function refreshData() {
+            location.reload();
+        }
+
         // Parse date from Formspree format
         function parseFormspreeDate(dateStr) {
             const date = new Date(dateStr);
@@ -593,15 +613,12 @@
         }
 
         function initializeData() {
-            // Handle both old format (submissions) and new format (intakes)
-            const data = allData.submissions || allData.intakes || [];
-            
-            if (!data || data.length === 0) {
-                document.getElementById('submissionsList').innerHTML = '<div class="no-data">No intake submissions loaded.</div>';
+            if (!allData.respondents || allData.respondents.length === 0) {
+                document.getElementById('submissionsList').innerHTML = '<div class="no-data">No intake submissions loaded. Embed JSON data in the allData object.</div>';
                 return;
             }
 
-            allIntakes = JSON.parse(JSON.stringify(data));
+            allIntakes = JSON.parse(JSON.stringify(allData.respondents));
             filteredData = JSON.parse(JSON.stringify(allIntakes));
             initializeFilters();
             updateDisplay();
@@ -821,57 +838,6 @@
             alert('Assessment saved for ' + filteredData[idx].lead_name);
         }
 
-        function refreshData() {
-            location.reload();
-        }
-
-        async function loadData() {
-            try {
-                // Try multiple possible paths
-                const paths = [
-                    './data/intakes.json',
-                    '/true-axis-intake/data/intakes.json',
-                    'data/intakes.json'
-                ];
-                
-                let jsonData = null;
-                let lastError = null;
-                
-                for (const path of paths) {
-                    try {
-                        const response = await fetch(path + '?t=' + Date.now());
-                        if (response.ok) {
-                            jsonData = await response.json();
-                            console.log('Successfully loaded from:', path);
-                            console.log('Raw data:', jsonData);
-                            break;
-                        }
-                    } catch (error) {
-                        lastError = error;
-                        console.log('Failed to load from:', path, error);
-                    }
-                }
-                
-                if (jsonData && jsonData.intakes && Array.isArray(jsonData.intakes)) {
-                    // Map the GitHub workflow data to the dashboard's expected format
-                    allData = {
-                        total_submissions: jsonData.total_intakes || jsonData.intakes.length,
-                        total_intakes: jsonData.total_intakes || jsonData.intakes.length,
-                        submissions: jsonData.intakes,
-                        intakes: jsonData.intakes
-                    };
-                    filteredData = null;
-                    initializeData();
-                    console.log('Dashboard loaded with', jsonData.intakes.length, 'intakes');
-                } else {
-                    console.error('No data loaded. Last error:', lastError);
-                    console.error('Data structure was:', jsonData);
-                }
-            } catch (error) {
-                console.error('Error in loadData:', error);
-            }
-        }
-
         function exportPDF() {
             if (filteredData.length === 0) {
                 alert('No submissions to export.');
@@ -1051,10 +1017,7 @@
             return data.length > 0 ? Math.round((yes / data.length) * 100) : 0;
         }
 
-        window.addEventListener('load', function() {
-            loadData();
-            initializeData();
-        });
+        window.addEventListener('load', loadData);
     </script>
 </body>
 </html>
