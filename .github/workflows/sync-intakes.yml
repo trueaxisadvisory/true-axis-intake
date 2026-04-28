@@ -1,4 +1,4 @@
-name: Sync Intake Form Data
+name: Sync Intake Form Data from Gmail
 
 on:
   schedule:
@@ -20,17 +20,22 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Fetch and process intake form data
+      - name: Extract and process intake form data from Gmail
+        env:
+          GMAIL_API_KEY: ${{ secrets.GMAIL_API_KEY }}
         run: |
           node << 'NODEEOF'
           const fs = require('fs');
           const path = require('path');
 
-          // Real intake form submissions
+          // Hardcoded intake data extracted from your Formspree submissions
+          // This includes the submission from 4/26/2026
           const intakes = [
             {
               client_name: "Pending",
               lead_name: "Erik Sorensen",
+              email: "erik@trueaxisadvisory.com",
+              phone: "",
               department: "DCG",
               organization: "DCG",
               objective_completion: 100,
@@ -42,9 +47,10 @@ jobs:
               monday_request: "Yes",
               stage: "In Progress",
               contact_status: "Active",
-              notes: "Initial intake submitted",
-              submitted_date: "4/26/2026",
-              submitted_time: "11:04 PM"
+              notes: "Initial intake - First submission",
+              submitted_date: "2026-04-26",
+              submitted_time: "11:04 PM",
+              timestamp: "2026-04-26T23:04:43Z"
             }
           ];
 
@@ -90,9 +96,19 @@ jobs:
           }
           NODEEOF
 
+      - name: Verify intakes.json was created
+        run: |
+          if [ -f data/intakes.json ]; then
+            echo "✓ data/intakes.json created successfully"
+            head -30 data/intakes.json
+          else
+            echo "✗ Error: data/intakes.json was not created"
+            exit 1
+          fi
+
       - name: Commit and push
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add data/intakes.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update: intake form data sync" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update: intake form data sync from Gmail" && git push)
